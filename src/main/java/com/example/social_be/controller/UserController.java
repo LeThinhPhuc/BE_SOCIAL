@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//! Lớp này xử lý các yêu cầu liên quan đến người dùng, chẳng hạn như đăng nhập, đăng xuất, v.v.
 @RestController
 @RequestMapping("/user")
 public class UserController {

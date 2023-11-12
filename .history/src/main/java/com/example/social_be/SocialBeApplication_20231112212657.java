@@ -3,8 +3,8 @@ package com.example.social_be;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//! Luc này đang ở main
-//? Đang ở follow
+//hello main
+// dang o main va se chuyen ve follow
 @SpringBootApplication
 public class SocialBeApplication {
 
