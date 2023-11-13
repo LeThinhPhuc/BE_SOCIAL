@@ -51,18 +51,21 @@ public class Post {
     @Column(name="[like]")
     private String like;
 
+
+    @Column(name="trongso", columnDefinition = "int default 50")
+    private int trongso;
+
     public Post() {
     }
 
-    public Post(String id_post, com.example.social_be.model.User user, String noidung, String image, String privacy, String like) {
+    public Post(String id_post, com.example.social_be.model.User user, String noidung, String image, String privacy, String like, int trongso) {
         this.id_post = id_post;
         User = user;
         this.noidung = noidung;
         this.image = image;
-       // this.create_at = create_at;
-        //this.update_at = update_at;
         this.privacy = privacy;
         this.like = like;
+        this.trongso = trongso;
     }
 
     public String getId_post() {
@@ -97,22 +100,6 @@ public class Post {
         this.image = image;
     }
 
-//    public Date getCreate_at() {
-//        return create_at;
-//    }
-//
-//    public void setCreate_at(Date create_at) {
-//        this.create_at = create_at;
-//    }
-
-//    public Date getUpdate_at() {
-//        return update_at;
-//    }
-//
-//    public void setUpdate_at(Date update_at) {
-//        this.update_at = update_at;
-//    }
-
     public String getPrivacy() {
         return privacy;
     }
@@ -127,5 +114,13 @@ public class Post {
 
     public void setLike(String like) {
         this.like = like;
+    }
+
+    public int getTrongso() {
+        return trongso;
+    }
+
+    public void setTrongso(int trongso) {
+        this.trongso = trongso;
     }
 }
