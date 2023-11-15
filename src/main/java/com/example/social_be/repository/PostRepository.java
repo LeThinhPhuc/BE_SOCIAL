@@ -4,6 +4,11 @@ import com.example.social_be.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface PostRepository extends JpaRepository<Post, String> {
+  //  List<Post> findByUserId(String userId);
+    List<Post> findByUserId(String userId);
+
 }

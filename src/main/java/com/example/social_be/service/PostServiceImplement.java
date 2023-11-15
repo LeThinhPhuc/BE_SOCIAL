@@ -6,6 +6,8 @@ import com.example.social_be.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImplement implements PostService {
     @Autowired
@@ -34,6 +36,12 @@ public class PostServiceImplement implements PostService {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Post> listPost(String userId){
+
+        return postRepository.findByUserId(userId);
     }
 
 }

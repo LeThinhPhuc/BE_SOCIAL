@@ -11,11 +11,15 @@ public class Post {
     @Id
     private String id_post;
 
+//    @ManyToOne
+//    @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
+//    @JsonBackReference
+//    private User User;
+
     @ManyToOne
     @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
     @JsonBackReference
-    private User User;
-
+    private User user;
 
     @Column(name="noidung")
     private String noidung;
@@ -52,21 +56,28 @@ public class Post {
     private String like;
 
 
-    @Column(name="trongso", columnDefinition = "int default 50")
+    @Column(name="trongso")
     private int trongso;
 
     @Column(name = "liked_users")
     private String likedUsers;
 
-    @Column(name="tontai", columnDefinition = "int default 1")
+    @Column(name="tontai")
     private int tontai;
+
+
+    @PrePersist
+    public void prePersist() {
+        this.trongso = 50;
+        this.tontai = 1;
+    }
 
     public Post() {
     }
 
-    public Post(String id_post, com.example.social_be.model.User user, String noidung, String image, String privacy, String like, int trongso, String likedUsers, int tontai) {
+    public Post(String id_post, User user, String noidung, String image, String privacy, String like, int trongso, String likedUsers, int tontai) {
         this.id_post = id_post;
-        User = user;
+        this.user = user;
         this.noidung = noidung;
         this.image = image;
         this.privacy = privacy;
@@ -84,12 +95,12 @@ public class Post {
         this.id_post = id_post;
     }
 
-    public com.example.social_be.model.User getUser() {
-        return User;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser(com.example.social_be.model.User user) {
-        User = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getNoidung() {
