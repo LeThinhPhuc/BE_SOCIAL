@@ -14,7 +14,11 @@ public class User {
     @Column(name = "id")
     private String id;
 
-    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Post> Post;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Post> Post;
 
@@ -53,7 +57,9 @@ public class User {
     @Column(name = "number_followed")
     private int number_followed;
 
-
+    public User(String username) {
+        this.username = username;
+    }
     public User() {
     }
 
