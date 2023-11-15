@@ -23,9 +23,17 @@ public class UserController {
     @GetMapping("/")
     public String test(){ return "user thinh phuc";}
 
-    @PostMapping("/add")
-    public User addUser(@RequestBody User user){
-        return userService.addUser(user);
+    @PostMapping("/signup")
+    public ResponseEntity<?> addUser(@RequestBody User user){
+            if(userService.addUser(user)==null){
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Bạn chưa điền đủ thông tin hoặc email đã tồn tại !");
+
+            }else{
+                return ResponseEntity.ok(userService.addUser(user));
+
+            }
+
+
     }
 
     @PutMapping("/update/{id}")
@@ -50,6 +58,21 @@ public class UserController {
             return ResponseEntity.ok(user);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Co loi khi lay user");
+        }
+    }
+
+//    @PostMapping("/login")
+//    public  User loginUser(@RequestBody User user){
+//        return userService.checkAuth(user);
+//    }
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        User authenticatedUser = userService.checkAuth(user);
+        if (authenticatedUser != null) {
+            return ResponseEntity.ok(authenticatedUser);
+        } else {
+            // Trả về mã trạng thái 401 (Unauthorized) nếu xác thực thất bại
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }

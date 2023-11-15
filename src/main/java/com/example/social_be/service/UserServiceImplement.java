@@ -7,16 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplement implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+
+
     @Override
     public User addUser(User user){
         if(user!=null){
-            return userRepository.save(user);
+//            return userRepository.save(user);
+            User checkEmail=userRepository.findByEmail(user.getEmail());
+            if(checkEmail!=null){
+                return null;
+            }else{
+                return userRepository.save(user);
+            }
         }
         return null;
     }
@@ -77,8 +88,11 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public User checkAuth(User user){
-        if(user!=null){
-
+        User userOptional=userRepository.findByEmail(user.getEmail());
+        if(userOptional!=null){
+               if(Objects.equals(user.getPassword(),userOptional.getPassword())){
+                   return userOptional;
+               }
         }
         return null;
     }

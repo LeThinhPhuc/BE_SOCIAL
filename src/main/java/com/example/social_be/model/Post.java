@@ -55,10 +55,16 @@ public class Post {
     @Column(name="trongso", columnDefinition = "int default 50")
     private int trongso;
 
+    @Column(name = "liked_users")
+    private String likedUsers;
+
+    @Column(name="tontai", columnDefinition = "int default 1")
+    private int tontai;
+
     public Post() {
     }
 
-    public Post(String id_post, com.example.social_be.model.User user, String noidung, String image, String privacy, String like, int trongso) {
+    public Post(String id_post, com.example.social_be.model.User user, String noidung, String image, String privacy, String like, int trongso, String likedUsers, int tontai) {
         this.id_post = id_post;
         User = user;
         this.noidung = noidung;
@@ -66,6 +72,8 @@ public class Post {
         this.privacy = privacy;
         this.like = like;
         this.trongso = trongso;
+        this.likedUsers = likedUsers;
+        this.tontai = tontai;
     }
 
     public String getId_post() {
@@ -122,5 +130,21 @@ public class Post {
 
     public void setTrongso(int trongso) {
         this.trongso = trongso;
+    }
+
+    public String getLikedUsers() {
+        return likedUsers;
+    }
+
+    public void setLikedUsers(String likedUsers) {
+        this.likedUsers = likedUsers;
+    }
+
+    public int getTontai() {
+        return tontai;
+    }
+
+    public void setTontai(int tontai) {
+        this.tontai = tontai;
     }
 }
