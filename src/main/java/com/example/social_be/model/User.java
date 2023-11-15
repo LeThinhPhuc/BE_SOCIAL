@@ -1,30 +1,30 @@
 package com.example.social_be.model;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="nguoidung")
+@Table(name = "nguoidung")
 public class User {
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private String id;
 
     @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Post> Post;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="username")
+    @Column(name = "username")
     private String username;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
 //    @Temporal(TemporalType.TIMESTAMP)
@@ -44,28 +44,37 @@ public class User {
 //    protected void onUpdate(){
 //        update_at=new Date();
 //    }
-
-    @Column(name="number_following")
+    @Column(name = "number_following")
     private int number_following;
 
-    @Column(name="number_post")
+    @Column(name = "number_post")
     private int number_post;
 
-    @Column(name="number_followed")
+    @Column(name = "number_followed")
     private int number_followed;
 
 
     public User() {
     }
 
-    public User(String id, List<com.example.social_be.model.Post> post, String email, String username, String password,int number_following, int number_post, int number_followed) {
+    public User(User user) {
+        this(user.getId(), user.getPost(), user.getEmail(), user.getUsername(),
+                user.getPassword(), user.getNumber_following(), user.getNumber_post(), user.getNumber_followed());
+    }
+
+    public User(String id, String email, String username, String password, int number_following, int number_post, int number_followed) {
+        this(id, new ArrayList<>(), email, username, password, number_following, number_post, number_followed);
+    }
+
+    public User(String id, List<com.example.social_be.model.Post> post, String email, String username, String password,
+                int number_following, int number_post, int number_followed) {
         this.id = id;
         Post = post;
         this.email = email;
         this.username = username;
         this.password = password;
-      //  this.create_at = create_at;
-       // this.update_at = update_at;
+        //  this.create_at = create_at;
+        // this.update_at = update_at;
         this.number_following = number_following;
         this.number_post = number_post;
         this.number_followed = number_followed;
