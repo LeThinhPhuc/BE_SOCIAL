@@ -70,20 +70,21 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public User getOneUser(String id){
-        User tmp=new User();
-        tmp.setId(userRepository.getById(id).getId());
-        tmp.setEmail(userRepository.getById(id).getEmail());
-        tmp.setPassword(userRepository.getById(id).getPassword());
-      //  tmp.setCreate_at(userRepository.getById(id).getCreate_at());
-      //  tmp.setUpdate_at(userRepository.getById(id).getUpdate_at());
-        tmp.setNumber_following(userRepository.getById(id).getNumber_following());
-        tmp.setNumber_post(userRepository.getById(id).getNumber_post());
-        tmp.setNumber_followed(userRepository.getById(id).getNumber_followed());
-
-
-
-
-        return tmp;
+//        User tmp=new User();
+//        tmp.setId(userRepository.getById(id).getId());
+//        tmp.setEmail(userRepository.getById(id).getEmail());
+//        tmp.setPassword(userRepository.getById(id).getPassword());
+//      //  tmp.setCreate_at(userRepository.getById(id).getCreate_at());
+//      //  tmp.setUpdate_at(userRepository.getById(id).getUpdate_at());
+//        tmp.setNumber_following(userRepository.getById(id).getNumber_following());
+//        tmp.setNumber_post(userRepository.getById(id).getNumber_post());
+//        tmp.setNumber_followed(userRepository.getById(id).getNumber_followed());
+//
+//
+//
+//
+//        return tmp;
+        return new User(userRepository.getById(id));
     }
 
     @Override
