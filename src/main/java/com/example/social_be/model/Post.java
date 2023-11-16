@@ -2,14 +2,16 @@ package com.example.social_be.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name="Post")
 public class Post {
     @Id
-    private String id_post;
+    private String id;
 
 //    @ManyToOne
 //    @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
@@ -27,7 +29,6 @@ public class Post {
     @Column(name="image")
     private String image;
 
-
 //    @Temporal(TemporalType.TIMESTAMP)
 //    @Column(name="create_at")
 //    private Date create_at;
@@ -37,7 +38,6 @@ public class Post {
 //    protected void onCreate(){
 //        create_at=new Date();
 //    }
-
 //    @Temporal(TemporalType.TIMESTAMP)
 //    @Column(name="update_at")
 //    private Date update_at;
@@ -48,17 +48,17 @@ public class Post {
 //        update_at=new Date();
 //    }
 //
-
     @Column(name="privacy")
     private String privacy;
 
     @Column(name="[like]")
-    private String like;
+    private int like;
 
 
     @Column(name="trongso")
     private int trongso;
 
+    //! Cần sửa thành List
     @Column(name = "liked_users")
     private String likedUsers;
 
@@ -75,8 +75,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id_post, User user, String noidung, String image, String privacy, String like, int trongso, String likedUsers, int tontai) {
-        this.id_post = id_post;
+    public Post(String id, User user, String noidung, String image, String privacy, int like, int trongso, String likedUsers, int tontai) {
+        this.id = id;
         this.user = user;
         this.noidung = noidung;
         this.image = image;
@@ -87,75 +87,13 @@ public class Post {
         this.tontai = tontai;
     }
 
-    public String getId_post() {
-        return id_post;
-    }
-
-    public void setId_post(String id_post) {
-        this.id_post = id_post;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getNoidung() {
-        return noidung;
-    }
-
-    public void setNoidung(String noidung) {
-        this.noidung = noidung;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getPrivacy() {
-        return privacy;
-    }
-
-    public void setPrivacy(String privacy) {
-        this.privacy = privacy;
-    }
-
-    public String getLike() {
-        return like;
-    }
-
-    public void setLike(String like) {
-        this.like = like;
-    }
-
-    public int getTrongso() {
-        return trongso;
-    }
-
-    public void setTrongso(int trongso) {
-        this.trongso = trongso;
-    }
-
-    public String getLikedUsers() {
-        return likedUsers;
-    }
-
-    public void setLikedUsers(String likedUsers) {
-        this.likedUsers = likedUsers;
-    }
-
-    public int getTontai() {
-        return tontai;
-    }
-
-    public void setTontai(int tontai) {
-        this.tontai = tontai;
+    public void update(Post post) {
+        this.setNoidung(post.getNoidung());
+        this.setImage(post.getImage());
+        this.setPrivacy(post.getPrivacy());
+        this.setLike(post.getLike());
+        this.setTrongso(post.getTrongso());
+        this.setLikedUsers(post.getLikedUsers());
+        this.setTontai(post.getTontai());
     }
 }
