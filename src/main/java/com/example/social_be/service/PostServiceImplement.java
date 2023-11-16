@@ -1,8 +1,10 @@
+
 package com.example.social_be.service;
 
 import com.example.social_be.model.Post;
 import com.example.social_be.model.User;
 import com.example.social_be.repository.PostRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,52 +15,87 @@ public class PostServiceImplement implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-    @Override
-    public Post addPost(Post post){
-        if(post!=null){
 
-            return postRepository.save(post);
+    @Override
+    public Post updatePost(String id, Post post) {
+        if (post == null) return null;
+
+        try {
+            Post postReturned = postRepository.getById(id);
+
+            //! Cần tối ưu
+            postReturned.setNoidung(post.getNoidung() == null ? postReturned.getNoidung() : post.getNoidung());
+            postReturned.setImage(post.getImage() == null ? postReturned.getImage() : post.getImage());
+            postReturned.setPrivacy(post.getPrivacy() == null ? postReturned.getPrivacy() : post.getPrivacy());
+            postReturned.setLike(post.getLike() == 0 ? postReturned.getLike() : post.getLike());
+            postReturned.setTrongso(post.getTrongso() == 0 ? postReturned.getTrongso() : post.getTrongso());
+
+            return postRepository.save(postReturned);
+        } catch (Exception e) {
+            return null;
+
         }
-        return null;
     }
 
+
     @Override
-    public Post updatePost(String id, Post post){
-        if(post!=null){
-            Post post1=postRepository.getById(id);
-            if(post1!=null){
-                post1.setTrongso(post.getTrongso()==0? post1.getTrongso() : post.getTrongso());
-                post1.setPrivacy(post.getPrivacy()==null? post1.getPrivacy() : post.getPrivacy());
-                post1.setNoidung(post.getNoidung()==null? post1.getNoidung() : post.getNoidung());
-//                post1.setTontai(post.getTontai());
-                post1.setLike(post.getLike()==null? post1.getLike() : post.getLike());
-                post1.setImage(post.getImage()==null? post1.getImage() : post.getImage());
-                post1.setLikedUsers(post.getLikedUsers()==null? post1.getLikedUsers() : post.getLikedUsers());
-                return postRepository.save(post1);
-            }
+    public Post addPost(Post post) {
+        if (post == null) return null;
+
+        System.out.println("Đang ở [PostServiceImplement]");
+        return postRepository.save(post);
+    }
+
+//    @Override
+//    public Post updatePost(String id, Post post) {
+//        if (post == null) return null;
+//
+//        try {
+//            Post postReturned = postRepository.findPostById(id);
+//
+//
+//            postReturned.update(post);
+//            return postRepository.save(postReturned);
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
+
+    @Override
+    public List<Post> listPost(String userId) {
+        try {
+            return postRepository.findByUserId(userId);
+
+        } catch (Exception e) {
+            return null;
+
         }
-        return null;
     }
 
     @Override
-    public List<Post> listPost(String userId){
+    public boolean deletePost(String postId) {
+        try {
+            Post postReturned = postRepository.getById(postId);
+            postRepository.delete(postReturned);
 
-        return postRepository.findByUserId(userId);
-    }
-
-    @Override
-    public Post deletePost(String postId){
-        if(postId!=null){
-            Post tmp=postRepository.getById(postId);
-            tmp.setTontai(0);
-            return postRepository.save(tmp);
+            return true;
+        }catch (Exception e) {
+            return  false;
         }
-        return null;
     }
 
     @Override
-    public List<Post> getAllPost(){
+    public List<Post> getAllPost() {
         return postRepository.findAll();
+    }
+
+    @Override
+    public Post getPost(String postId) {
+        try {
+            return postRepository.findById(postId).orElse(null);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
