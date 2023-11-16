@@ -58,9 +58,8 @@ public class Post {
     @Column(name="trongso")
     private int trongso;
 
-//    //! Cần tạo bảng mới
-//    @Column(name = "liked_users")
-//    private String likedUsers;
+    @Column(name = "liked_users")
+    private String likedUsers;
 
     @Column(name="tontai")
     private int tontai;
@@ -70,6 +69,7 @@ public class Post {
     public void prePersist() {
         this.trongso = 50;
         this.tontai = 1;
+        this.likedUsers = "";
     }
 
     public Post() {

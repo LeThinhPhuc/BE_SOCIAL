@@ -84,4 +84,82 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Co loi khi lay post");
         }
     }
+
+    // http://localhost:8080/post/like?id_post=1&userId=3
+    @PostMapping("/like")
+    public ResponseEntity<?> likePost(@RequestParam(value = "id_post", defaultValue = "-1") String id_post,
+                                      @RequestParam(value = "userId", defaultValue = "-1") String userId) {
+        try {
+            Post post = postService.getPost(id_post);
+            User user = userService.getOneUser(userId);
+
+            if (post == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bài viết không tồn tại");
+            }
+
+            if (post.getLikedUsers().contains(userId)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Người dùng đã like bài viết này rồi");
+            }
+
+            if(user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Người dùng không tồn tại");
+            }
+
+            String seperate = post.getLikedUsers().equals("") ? "" : ";";
+            String name = post.getLikedUsers() + seperate + user.getUsername();
+
+            post.setLikedUsers(name);
+            post.setLike(post.getLike() + 1);
+
+            Post updated =  postService.updatePost(id_post, post);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi thực hiện like bài viết");
+        }
+    }
+
+
+    // http://localhost:8080/post/dislike?id_post=1&userId=3
+    @PostMapping("/dislike")
+    public ResponseEntity<?> dislikePost(@RequestParam(value = "id_post", defaultValue = "-1") String id_post,
+                                         @RequestParam(value = "userId", defaultValue = "-1") String userId) {
+        try {
+            Post post = postService.getPost(id_post);
+            User user = userService.getOneUser(userId);
+
+            if (post == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bài viết không tồn tại");
+            }
+
+            if (!post.getLikedUsers().contains(userId)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Người dùng chưa like bài viết này");
+            }
+
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Người dùng không tồn tại");
+            }
+
+            String likedUsers = post.getLikedUsers();
+//            likedUsers = likedUsers.replace(user.getUsername() + ";", "");
+            likedUsers = likedUsers.replaceAll(user.getUsername() + "(;|$)", "");
+
+            if(likedUsers.endsWith(";")) {
+                likedUsers = likedUsers.substring(0,likedUsers.length()-1);
+            }
+
+//            int index = likedUsers.indexOf(user.getUsername());
+//            likedUsers =  likedUsers.substring(0, index-1) +
+//                    likedUsers.substring(index+user.getUsername().length());
+
+            // user1;user2;user3
+
+            post.setLikedUsers(likedUsers);
+            post.setLike(post.getLike() - 1);
+
+            Post updated = postService.updatePost(id_post, post);
+            return ResponseEntity.ok(updated);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi thực hiện dislike bài viết");
+        }
+    }
 }
