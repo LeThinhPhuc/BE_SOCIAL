@@ -11,7 +11,7 @@ import java.util.Date;
 @Table(name="Post")
 public class Post {
     @Id
-    private String id;
+    private String id_post;
 
 //    @ManyToOne
 //    @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
@@ -29,7 +29,7 @@ public class Post {
     @Column(name="image")
     private String image;
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    //    @Temporal(TemporalType.TIMESTAMP)
 //    @Column(name="create_at")
 //    private Date create_at;
 //
@@ -58,9 +58,9 @@ public class Post {
     @Column(name="trongso")
     private int trongso;
 
-    //! Cần sửa thành List
-    @Column(name = "liked_users")
-    private String likedUsers;
+//    //! Cần tạo bảng mới
+//    @Column(name = "liked_users")
+//    private String likedUsers;
 
     @Column(name="tontai")
     private int tontai;
@@ -75,15 +75,14 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id, User user, String noidung, String image, String privacy, int like, int trongso, String likedUsers, int tontai) {
-        this.id = id;
+    public Post(String id_post, User user, String noidung, String image, String privacy, int like, int trongso, int tontai) {
+        this.id_post = id_post;
         this.user = user;
         this.noidung = noidung;
         this.image = image;
         this.privacy = privacy;
         this.like = like;
         this.trongso = trongso;
-        this.likedUsers = likedUsers;
         this.tontai = tontai;
     }
 
@@ -93,7 +92,6 @@ public class Post {
         this.setPrivacy(post.getPrivacy());
         this.setLike(post.getLike());
         this.setTrongso(post.getTrongso());
-        this.setLikedUsers(post.getLikedUsers());
         this.setTontai(post.getTontai());
     }
 }
