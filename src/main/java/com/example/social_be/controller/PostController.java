@@ -43,6 +43,7 @@ public class PostController {
             System.out.println("Lỗi rồi");
             return null;
         }
+
     }
 
     @GetMapping("/list/{userId}")
@@ -162,4 +163,5 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi thực hiện dislike bài viết");
         }
     }
+
 }

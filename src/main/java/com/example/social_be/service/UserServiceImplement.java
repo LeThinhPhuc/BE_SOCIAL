@@ -37,14 +37,14 @@ public class UserServiceImplement implements UserService {
         if(user!=null){
             User user1=userRepository.getById(id);
             if(user1!=null){
-                user1.setEmail(user.getEmail());
-                user1.setUsername(user.getUsername());
-                user1.setPassword(user.getPassword());
+                user1.setEmail(user.getEmail()==null? user1.getEmail() : user.getEmail());
+                user1.setUsername(user.getUsername()==null? user1.getUsername() : user.getUsername());
+                user1.setPassword(user.getPassword()==null? user1.getPassword() : user.getPassword());
              //   user1.setCreate_at(user.getCreate_at());
            //     user1.setUpdate_at(user.getUpdate_at());
-                user1.setNumber_following(user.getNumber_following());
+//                user1.setNumber_following(user.getNumber_following());
                 user1.setNumber_post(user.getNumber_post());
-                user1.setNumber_followed(user.getNumber_followed());
+//                user1.setNumber_followed(user.getNumber_followed());
                 return userRepository.save(user1);
             }
         }

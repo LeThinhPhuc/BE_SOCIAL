@@ -33,6 +33,7 @@ public class PostServiceImplement implements PostService {
             return postRepository.save(postReturned);
         } catch (Exception e) {
             return null;
+
         }
     }
 
@@ -67,6 +68,7 @@ public class PostServiceImplement implements PostService {
 
         } catch (Exception e) {
             return null;
+
         }
     }
 
@@ -95,4 +97,5 @@ public class PostServiceImplement implements PostService {
             return null;
         }
     }
+
 }
