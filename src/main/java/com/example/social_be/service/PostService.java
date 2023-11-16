@@ -10,4 +10,8 @@ public interface PostService {
     public Post updatePost(String id, Post post);
 
     public List<Post> listPost(String userId);
+
+    public Post deletePost(String postId);
+
+    public List<Post> getAllPost();
 }
