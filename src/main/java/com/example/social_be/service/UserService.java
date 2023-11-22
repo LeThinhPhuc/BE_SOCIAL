@@ -16,4 +16,5 @@ public interface UserService {
     public User getOneUser(String id);
 
     public User checkAuth(User user);
+
 }

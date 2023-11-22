@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,String> {
     User findByEmail(String email);
 
+
+    List<User> findUserByIdNotLike(String id);
 }
