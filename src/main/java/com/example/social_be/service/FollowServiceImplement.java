@@ -42,4 +42,12 @@ public class FollowServiceImplement implements FollowService {
     public List<Follow> getFollowers(User user) {
         return followRepository.findFollowsByFollowed(user.getId());
     }
+
+
+    @Override
+    public List<Follow> getAllFollow(){
+        return followRepository.findAll();
+    }
+
+
 }

@@ -46,6 +46,9 @@ public class FollowController {
 
             followed.setNumber_following(followed.getNumber_following() + 1);
             userService.updateUser(followedId, followed);
+            System.out.println(user);
+            System.out.println(followed);
+
 
             return true;
         } catch (EntityNotFoundException e) {
@@ -101,4 +104,9 @@ public class FollowController {
         }
     }
 
+
+    @GetMapping("/all")
+    public List<Follow> getAllFollow(){
+        return followService.getAllFollow();
+    }
 }

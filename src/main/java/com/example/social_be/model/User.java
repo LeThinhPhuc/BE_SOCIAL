@@ -2,11 +2,13 @@ package com.example.social_be.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "nguoidung")
 public class User {
@@ -57,6 +59,9 @@ public class User {
     @Column(name = "number_followed")
     private int number_followed;
 
+    @Column(name="avatar")
+    private String avatar;
+
     public User(String username) {
         this.username = username;
     }
@@ -65,66 +70,26 @@ public class User {
 
     public User(User user) {
         this(user.getId(), user.getPost(), user.getEmail(), user.getUsername(),
-                user.getPassword(), user.getNumber_following(), user.getNumber_post(), user.getNumber_followed());
+                user.getPassword(), user.getNumber_following(), user.getNumber_post(), user.getNumber_followed(), user.getAvatar());
     }
 
-    public User(String id, String email, String username, String password, int number_following, int number_post, int number_followed) {
-        this(id, new ArrayList<>(), email, username, password, number_following, number_post, number_followed);
+    public User(String id, String email, String username, String password, int number_following, int number_post, int number_followed, String avatar) {
+        this(id, new ArrayList<>(), email, username, password, number_following, number_post, number_followed, avatar);
     }
 
-    public User(String id, List<com.example.social_be.model.Post> post, String email, String username, String password,
-                int number_following, int number_post, int number_followed) {
+    public User(String id, List<com.example.social_be.model.Post> post, String email, String username, String password, int number_following, int number_post, int number_followed, String avatar) {
         this.id = id;
         Post = post;
         this.email = email;
         this.username = username;
         this.password = password;
-        //  this.create_at = create_at;
-        // this.update_at = update_at;
         this.number_following = number_following;
         this.number_post = number_post;
         this.number_followed = number_followed;
+        this.avatar = avatar;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public List<com.example.social_be.model.Post> getPost() {
-        return Post;
-    }
-
-    public void setPost(List<com.example.social_be.model.Post> post) {
-        Post = post;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 //    public Date getCreate_at() {
 //        return create_at;
@@ -142,27 +107,6 @@ public class User {
 //        this.update_at = update_at;
 //    }
 
-    public int getNumber_following() {
-        return number_following;
-    }
 
-    public void setNumber_following(int number_following) {
-        this.number_following = number_following;
-    }
 
-    public int getNumber_post() {
-        return number_post;
-    }
-
-    public void setNumber_post(int number_post) {
-        this.number_post = number_post;
-    }
-
-    public int getNumber_followed() {
-        return number_followed;
-    }
-
-    public void setNumber_followed(int number_followed) {
-        this.number_followed = number_followed;
-    }
 }

@@ -164,4 +164,9 @@ public class PostController {
         }
     }
 
+    @GetMapping("/nouser/{id}")
+    public List<Post> getPostNoUser(@PathVariable("id") String id){
+        return postRepository.findPostByUser_IdIsNotLike(id);
+    }
+
 }

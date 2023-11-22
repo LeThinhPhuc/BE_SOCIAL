@@ -12,6 +12,8 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, String> {
     List<Post> findByUserId(String userId);
 
+    List<Post> findPostByUser_IdIsNotLike(String userId);
+
 
 }
 

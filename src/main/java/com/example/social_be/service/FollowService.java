@@ -10,4 +10,6 @@ public interface FollowService {
     public boolean unfollow(Follow follow);
     public List<Follow> getFollowing(User user);
     public List<Follow> getFollowers(User user);
+
+    public List<Follow> getAllFollow();
 }
