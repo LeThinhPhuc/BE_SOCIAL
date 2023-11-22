@@ -19,4 +19,5 @@ public interface FollowRepository extends JpaRepository<Follow, FollowId>{
     List<Follow> findFollowByUsers(@Param("users") String users);
 
     List<Follow> findFollowsByFollowed(@Param("followed") String followed);
+
 }

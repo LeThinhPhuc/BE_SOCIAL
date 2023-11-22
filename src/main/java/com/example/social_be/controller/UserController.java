@@ -2,6 +2,7 @@ package com.example.social_be.controller;
 
 
 import com.example.social_be.model.User;
+import com.example.social_be.repository.UserRepository;
 import com.example.social_be.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,9 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     public final UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public UserController(UserService userService){
@@ -74,5 +78,10 @@ public class UserController {
             // Trả về mã trạng thái 401 (Unauthorized) nếu xác thực thất bại
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
+
+    @GetMapping("/notid/{id}")
+    public List<User> getUserNotId(@PathVariable("id") String id){
+            return userRepository.findUserByIdNotLike(id);
     }
 }

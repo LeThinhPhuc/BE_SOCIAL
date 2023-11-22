@@ -65,6 +65,9 @@ public class Post {
     private int tontai;
 
 
+    @Column(name="day")
+    private String day;
+
     @PrePersist
     public void prePersist() {
         this.trongso = 50;
@@ -75,7 +78,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String id_post, User user, String noidung, String image, String privacy, int like, int trongso, int tontai) {
+    public Post(String id_post, User user, String noidung, String image, String privacy, int like, int trongso, String likedUsers, int tontai, String day) {
         this.id_post = id_post;
         this.user = user;
         this.noidung = noidung;
@@ -83,7 +86,9 @@ public class Post {
         this.privacy = privacy;
         this.like = like;
         this.trongso = trongso;
+        this.likedUsers = likedUsers;
         this.tontai = tontai;
+        this.day = day;
     }
 
     public void update(Post post) {

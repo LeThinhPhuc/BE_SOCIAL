@@ -8,6 +8,8 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -29,6 +31,10 @@ public class PostServiceImplement implements PostService {
             postReturned.setPrivacy(post.getPrivacy() == null ? postReturned.getPrivacy() : post.getPrivacy());
             postReturned.setLike(post.getLike() == 0 ? postReturned.getLike() : post.getLike());
             postReturned.setTrongso(post.getTrongso() == 0 ? postReturned.getTrongso() : post.getTrongso());
+            LocalDateTime cur=LocalDateTime.now();
+            DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            String formatted=cur.format(formatter);
+            postReturned.setDay(formatted);
 
             return postRepository.save(postReturned);
         } catch (Exception e) {
@@ -41,7 +47,10 @@ public class PostServiceImplement implements PostService {
     @Override
     public Post addPost(Post post) {
         if (post == null) return null;
-
+        LocalDateTime cur=LocalDateTime.now();
+        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        String formatted=cur.format(formatter);
+        post.setDay(formatted);
         System.out.println("Đang ở [PostServiceImplement]");
         return postRepository.save(post);
     }

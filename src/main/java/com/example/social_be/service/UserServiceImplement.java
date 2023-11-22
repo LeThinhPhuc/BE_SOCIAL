@@ -42,9 +42,9 @@ public class UserServiceImplement implements UserService {
                 user1.setPassword(user.getPassword()==null? user1.getPassword() : user.getPassword());
              //   user1.setCreate_at(user.getCreate_at());
            //     user1.setUpdate_at(user.getUpdate_at());
-//                user1.setNumber_following(user.getNumber_following());
-                user1.setNumber_post(user.getNumber_post());
-//                user1.setNumber_followed(user.getNumber_followed());
+                user1.setNumber_following(user.getNumber_following());
+                user1.setNumber_post(user.getNumber_post()==0? user1.getNumber_post() : user.getNumber_post());
+                user1.setNumber_followed(user.getNumber_followed());
                 return userRepository.save(user1);
             }
         }
@@ -97,4 +97,5 @@ public class UserServiceImplement implements UserService {
         }
         return null;
     }
+
 }
