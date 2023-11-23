@@ -24,13 +24,13 @@ public class User {
     @JsonManagedReference
     private List<Post> Post;
 
-    @Column(name = "email", columnDefinition = "nvarchar")
+    @Column(name = "email", columnDefinition = "nvarchar(max)")
     private String email;
 
-    @Column(name = "username", columnDefinition = "nvarchar")
+    @Column(name = "username", columnDefinition = "nvarchar(max)")
     private String username;
 
-    @Column(name = "password", columnDefinition = "nvarchar")
+    @Column(name = "password", columnDefinition = "nvarchar(max)")
     private String password;
 
 //    @Temporal(TemporalType.TIMESTAMP)
@@ -59,7 +59,7 @@ public class User {
     @Column(name = "number_followed")
     private int number_followed;
 
-    @Column(name="avatar", columnDefinition = "nvarchar")
+    @Column(name="avatar", columnDefinition = "nvarchar(max)")
     private String avatar;
 
     public User(String username) {
