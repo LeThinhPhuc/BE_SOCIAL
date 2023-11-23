@@ -23,10 +23,10 @@ public class Post {
     @JsonBackReference
     private User user;
 
-    @Column(name="noidung", columnDefinition = "nvarchar")
+    @Column(name="noidung", columnDefinition = "nvarchar(max)")
     private String noidung;
 
-    @Column(name="image", columnDefinition = "nvarchar")
+    @Column(name="image", columnDefinition = "nvarchar(max)")
     private String image;
 
     //    @Temporal(TemporalType.TIMESTAMP)
@@ -48,7 +48,7 @@ public class Post {
 //        update_at=new Date();
 //    }
 //
-    @Column(name="privacy", columnDefinition = "nvarchar")
+    @Column(name="privacy", columnDefinition = "nvarchar(max)")
     private String privacy;
 
     @Column(name="[like]")
@@ -58,14 +58,14 @@ public class Post {
     @Column(name="trongso")
     private int trongso;
 
-    @Column(name = "liked_users", columnDefinition = "nvarchar")
+    @Column(name = "liked_users", columnDefinition = "nvarchar(max)")
     private String likedUsers;
 
     @Column(name="tontai")
     private int tontai;
 
 
-    @Column(name="day", columnDefinition = "nvarchar")
+    @Column(name="day", columnDefinition = "nvarchar(max)")
     private String day;
 
     @PrePersist
