@@ -40,6 +40,7 @@ public class UserServiceImplement implements UserService {
                 user1.setEmail(user.getEmail()==null? user1.getEmail() : user.getEmail());
                 user1.setUsername(user.getUsername()==null? user1.getUsername() : user.getUsername());
                 user1.setPassword(user.getPassword()==null? user1.getPassword() : user.getPassword());
+                user1.setAvatar(user.getAvatar()==null? user1.getAvatar() : user.getAvatar());
              //   user1.setCreate_at(user.getCreate_at());
            //     user1.setUpdate_at(user.getUpdate_at());
                 user1.setNumber_following(user.getNumber_following());

@@ -132,13 +132,15 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bài viết không tồn tại");
             }
 
-            if (!post.getLikedUsers().contains(userId)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Người dùng chưa like bài viết này");
-            }
-
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Người dùng không tồn tại");
             }
+
+            if (!post.getLikedUsers().contains(user.getUsername())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Người dùng chưa like bài viết này");
+            }
+
+
 
             String likedUsers = post.getLikedUsers();
 //            likedUsers = likedUsers.replace(user.getUsername() + ";", "");
