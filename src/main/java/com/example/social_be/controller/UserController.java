@@ -84,4 +84,13 @@ public class UserController {
     public List<User> getUserNotId(@PathVariable("id") String id){
             return userRepository.findUserByIdNotLike(id);
     }
+
+    @GetMapping("/getbyemail/{email}")
+    public User  getUserByEmail(@PathVariable("email") String email){
+        User tmp= userRepository.findByEmail(email);
+        if(tmp!=null){
+            return tmp;
+        }
+        return null;
+    }
 }
