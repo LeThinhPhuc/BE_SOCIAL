@@ -107,7 +107,7 @@ public class PostController {
             }
 
             String seperate = post.getLikedUsers().equals("") ? "" : ";";
-            String name = post.getLikedUsers() + seperate + user.getUsername();
+            String name = post.getLikedUsers() + seperate + user.getId();
 
             post.setLikedUsers(name);
             post.setLike(post.getLike() + 1);
@@ -136,7 +136,7 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Người dùng không tồn tại");
             }
 
-            if (!post.getLikedUsers().contains(user.getUsername())) {
+            if (!post.getLikedUsers().contains(user.getId())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Người dùng chưa like bài viết này");
             }
 
@@ -144,7 +144,7 @@ public class PostController {
 
             String likedUsers = post.getLikedUsers();
 //            likedUsers = likedUsers.replace(user.getUsername() + ";", "");
-            likedUsers = likedUsers.replaceAll(user.getUsername() + "(;|$)", "");
+            likedUsers = likedUsers.replaceAll(user.getId() + "(;|$)", "");
 
             if(likedUsers.endsWith(";")) {
                 likedUsers = likedUsers.substring(0,likedUsers.length()-1);
