@@ -30,33 +30,33 @@ public class FollowController {
 
     //! http://localhost:8080/f/follow?userId=1&followedId=3
     @PostMapping("/follow")
-    public ResponseEntity<Boolean> follow(@RequestParam(value = "userId", defaultValue = "-1") String userId,
+    public Boolean follow(@RequestParam(value = "userId", defaultValue = "-1") String userId,
                                           @RequestParam(value = "followedId", defaultValue = "-1") String followedId) {
-        if (userId.equals("-1") || followedId.equals("-1")) return ResponseEntity.badRequest().body(false);;
-        if(userId.equals(followedId)) return ResponseEntity.badRequest().body(false);;
+        if (userId.equals("-1") || followedId.equals("-1")) return false;;
+        if(userId.equals(followedId)) return false;;
 
         try {
-            System.out.println("Đang ở try");
 
             User user = new User(userService.getOneUser(userId)),
                     followed = new User(userService.getOneUser(followedId));
-            System.out.println("Đã lấy đc 2 user");
 
             Follow follow = new Follow(user, followed);
-            followService.follow(follow);
-            System.out.println("Đã follow");
+            boolean result = followService.follow(follow);
+            if(!result) return false;
+
 
             user.setNumber_followed(user.getNumber_followed() + 1);
             userService.updateUser(userId, user);
 
             followed.setNumber_following(followed.getNumber_following() + 1);
             userService.updateUser(followedId, followed);
+
             System.out.println(user);
             System.out.println(followed);
-            System.out.println("Đã update follow");
-            return ResponseEntity.ok(true);
+
+            return true;
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(false);
+            return false;
         }
     }
 

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 ////
@@ -19,5 +20,7 @@ public interface FollowRepository extends JpaRepository<Follow, FollowId>{
     List<Follow> findFollowByUsers(@Param("users") String users);
 
     List<Follow> findFollowsByFollowed(@Param("followed") String followed);
+
+    Optional<Follow> findFollowByUsersAndFollowed(@Param("users") String users, @Param("followed") String followed);
 
 }

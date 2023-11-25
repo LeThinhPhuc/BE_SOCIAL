@@ -20,9 +20,7 @@ public class User {
 //    @JsonManagedReference
 //    private List<Post> Post;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Post> Post;
+
 
     @Column(name = "email", columnDefinition = "nvarchar(max)")
     private String email;
@@ -69,7 +67,7 @@ public class User {
     }
 
     public User(User user) {
-        this(user.getId(), user.getPost(), user.getEmail(), user.getUsername(),
+        this(user.getId(),  user.getEmail(), user.getUsername(),
                 user.getPassword(), user.getNumber_following(), user.getNumber_post(), user.getNumber_followed(), user.getAvatar());
     }
 
@@ -79,7 +77,6 @@ public class User {
 
     public User(String id, List<com.example.social_be.model.Post> post, String email, String username, String password, int number_following, int number_post, int number_followed, String avatar) {
         this.id = id;
-        Post = post;
         this.email = email;
         this.username = username;
         this.password = password;

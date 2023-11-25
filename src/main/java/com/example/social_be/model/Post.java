@@ -18,10 +18,15 @@ public class Post {
 //    @JsonBackReference
 //    private User User;
 
+//    @ManyToOne
+//    @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
+//    @JsonBackReference
+//    private User user;
+
     @ManyToOne
-    @JoinColumn(name="userid", nullable = false, referencedColumnName = "id")
-    @JsonBackReference
+    @JoinColumn(name = "userid", nullable = false, referencedColumnName = "id")
     private User user;
+
 
     @Column(name="noidung", columnDefinition = "nvarchar(max)")
     private String noidung;
@@ -98,5 +103,21 @@ public class Post {
         this.setLike(post.getLike());
         this.setTrongso(post.getTrongso());
         this.setTontai(post.getTontai());
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id_post='" + id_post + '\'' +
+//                ", user=" + user +
+                ", noidung='" + noidung + '\'' +
+                ", image='" + image + '\'' +
+                ", privacy='" + privacy + '\'' +
+                ", like=" + like +
+                ", trongso=" + trongso +
+                ", likedUsers='" + likedUsers + '\'' +
+                ", tontai=" + tontai +
+                ", day='" + day + '\'' +
+                '}';
     }
 }
