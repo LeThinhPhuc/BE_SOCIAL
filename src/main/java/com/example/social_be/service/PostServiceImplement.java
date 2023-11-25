@@ -45,14 +45,15 @@ public class PostServiceImplement implements PostService {
 
 
     @Override
-    public Post addPost(Post post) {
-        if (post == null) return null;
+    public boolean addPost(Post post) {
+        if (post == null) return false;
         LocalDateTime cur=LocalDateTime.now();
         DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
         String formatted=cur.format(formatter);
         post.setDay(formatted);
         System.out.println("Đang ở [PostServiceImplement]");
-        return postRepository.save(post);
+        postRepository.save(post);
+        return true;
     }
 
 //    @Override

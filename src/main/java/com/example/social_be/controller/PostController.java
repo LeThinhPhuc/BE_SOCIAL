@@ -31,17 +31,18 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public Post addPost(@RequestBody Post post) {
+    public boolean addPost(@RequestBody Post post) {
         try {
             User user = userService.getOneUser(post.getUser().getId());
 
             user.setNumber_post(user.getNumber_post() + 1);
             userService.updateUser(post.getUser().getId(), user);
             System.out.println("Sắp add");
-            return postService.addPost(post);
+           postService.addPost(post);
+           return true;
         }catch (Exception e) {
             System.out.println("Lỗi rồi");
-            return null;
+            return false;
         }
 
     }
