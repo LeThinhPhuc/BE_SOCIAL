@@ -17,9 +17,10 @@ public class FollowServiceImplement implements FollowService {
 
     @Override
     public boolean follow(Follow follow) {
-        Optional<Follow> existingFollow = followRepository.findById(follow.getId());
+        Optional<Follow> existingFollow = followRepository.findFollowByUsersAndFollowed(follow.getUsers(), follow.getFollowed());
 
         if (existingFollow.isPresent() && existingFollow.get().equals(follow)) {
+            System.out.println("Đã tồn tại follow");
             return false;
         }
 
