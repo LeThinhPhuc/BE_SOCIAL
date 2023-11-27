@@ -31,15 +31,22 @@ public class PostServiceImplement implements PostService {
             postReturned.setPrivacy(post.getPrivacy() == null ? postReturned.getPrivacy() : post.getPrivacy());
             postReturned.setLike(post.getLike() == 0 ? postReturned.getLike() : post.getLike());
             postReturned.setTrongso(post.getTrongso() == 0 ? postReturned.getTrongso() : post.getTrongso());
-            LocalDateTime cur=LocalDateTime.now();
-            DateTimeFormatter formatter=DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            String formatted=cur.format(formatter);
-            postReturned.setDay(formatted);
+            // Kiểm tra nếu ngày không phải là null thì mới cập nhật
+            if (post.getDay() != null) {
+                postReturned.setDay(post.getDay());
+            }
+
+            // Nếu ngày là null, giữ ngày hiện tại
+            if (postReturned.getDay() == null) {
+                LocalDateTime cur = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                String formatted = cur.format(formatter);
+                postReturned.setDay(formatted);
+            }
 
             return postRepository.save(postReturned);
         } catch (Exception e) {
             return null;
-
         }
     }
 

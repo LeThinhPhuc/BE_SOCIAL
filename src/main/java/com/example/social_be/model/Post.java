@@ -61,7 +61,7 @@ public class Post {
 
 
     @Column(name="trongso")
-    private int trongso;
+    private float trongso;
 
     @Column(name = "liked_users", columnDefinition = "nvarchar(max)")
     private String likedUsers;
